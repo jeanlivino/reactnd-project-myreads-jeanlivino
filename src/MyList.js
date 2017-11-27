@@ -1,28 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
-import * as BooksAPI from './BooksAPI'
 
 class MyList extends React.Component {
+render()  {
 
-  state = {
-    books: []
-  }
+   const { books, updateBooks } = this.props
 
-  componentDidMount(){
-  BooksAPI.getAll().then((books)=>{
-    this.setState({books})
-  })
-}
-
-  updateBooks = (book, shelf) => {
-      book.shelf = shelf // atualizando a shelf do book
-      BooksAPI.update(book, shelf).then(() => {
-      this.setState({ books : this.state.books.filter(b => b.id === book.id).concat([ book ]) })
-    })
-  }
-
-  render()  {
     return (
   <div className="list-books">
     <div className="list-books-title">
@@ -32,22 +16,22 @@ class MyList extends React.Component {
       <div>
         <BookShelf
           className="currentlyReading"
-          bookArray={this.state.books}
-          updateBooks={this.updateBooks}
+          bookArray={books}
+          updateBooks={updateBooks}
           bookStatus="currentlyReading"
           shelfTitle="Currently Reading"
         />
         <BookShelf
           className="wantToRead"
-          bookArray={this.state.books}
-          updateBooks={this.updateBooks}
+          bookArray={books}
+          updateBooks={updateBooks}
           bookStatus="wantToRead"
           shelfTitle="Want to Read"
         />
         <BookShelf
           className="read"
-          bookArray={this.state.books}
-          updateBooks={this.updateBooks}
+          bookArray={books}
+          updateBooks={updateBooks}
           bookStatus="read"
           shelfTitle="Read"
         />
