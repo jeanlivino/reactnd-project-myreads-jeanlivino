@@ -5,7 +5,7 @@ import BookShelf from './BookShelf'
 class MyList extends React.Component {
 render()  {
 
-   const { books, updateBooks } = this.props
+   const { books, onUpdateBooks } = this.props
 
     return (
   <div className="list-books">
@@ -17,21 +17,21 @@ render()  {
         <BookShelf
           className="currentlyReading"
           bookArray={books}
-          updateBooks={updateBooks}
+          onUpdateBooks={onUpdateBooks}
           bookStatus="currentlyReading"
           shelfTitle="Currently Reading"
         />
         <BookShelf
           className="wantToRead"
           bookArray={books}
-          updateBooks={updateBooks}
+          onUpdateBooks={onUpdateBooks}
           bookStatus="wantToRead"
           shelfTitle="Want to Read"
         />
         <BookShelf
           className="read"
           bookArray={books}
-          updateBooks={updateBooks}
+          onUpdateBooks={onUpdateBooks}
           bookStatus="read"
           shelfTitle="Read"
         />

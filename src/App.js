@@ -24,17 +24,22 @@ class BooksApp extends React.Component {
   updateBooks = (book, shelf) => {
       book.shelf = shelf // atualizando a shelf do book
       BooksAPI.update(book, shelf).then(() => {
-      this.setState({ booksQuery : this.state.books.filter(b => b.id === book.id).concat([ book ]) })
+        this.state.books.filter(b => b.id !== book.id).concat([book])
+        this.setState({ books: this.state.books.filter(b => b.id !== book.id).concat([book]) })
     })
   }
 
   search = (query) => {
     this.setState({ query: query });
     BooksAPI.search(this.state.query, 20).then((books) => {
-      books.map(book => (this.state.books.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
-       this.setState({booksQuery: books})
+      if (books.error) {
+        this.setState({booksQuery: []})
+      }
+      else {
+        books.map(book => (this.state.books.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
+        this.setState({booksQuery: books})
+      }
      })
-
   }
 
   render() {
@@ -43,15 +48,15 @@ class BooksApp extends React.Component {
         <Route path="/search" render={() => (
           <SearchBooks
             booksList={this.state.booksQuery}
-            updateBooks={this.updateBooks}
-            search={this.search}
+            onUpdateBooks={this.updateBooks}
+            onSearch={this.search}
          />)}
       />
 
         <Route exact path="/" render={() => (
           <MyList
             books={this.state.books}
-            updateBooks={this.updateBooks}
+            onUpdateBooks={this.updateBooks}
             />
           )}
         />
