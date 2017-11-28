@@ -3,6 +3,7 @@
 
 This is the final assessment project of the **React Fundamentals of Udacity's React Nanodegree Course**.
 The project is a bookcase application that allows you to select and sort the books you have read, are reading or want to read.
+**This is my first project with React.**
 
 
 ## Get started
