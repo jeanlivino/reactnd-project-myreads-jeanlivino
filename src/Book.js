@@ -1,6 +1,6 @@
 import React  from 'react'
 
-const Books = function(props) {
+const Book = function(props) {
 
 return(
           <li key={props.book.id}>
@@ -24,4 +24,4 @@ return(
 )
 }
 
-export default Books
+export default Book
