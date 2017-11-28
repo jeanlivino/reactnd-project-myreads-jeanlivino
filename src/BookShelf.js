@@ -12,6 +12,7 @@ class BookShelf extends React.Component {
         <ol className="books-grid">
           {bookArray.filter(book => book.shelf === bookStatus).sort(sortBy('title')).map(book =>
               <Book
+                key={book.id}
                 onUpdateBooks={onUpdateBooks}
                 book={book}
               />)

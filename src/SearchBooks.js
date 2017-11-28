@@ -22,6 +22,7 @@ class SearchBooks extends React.Component {
         <ol className="books-grid">
           {booksList.sort(sortBy('title')).map(book =>
             <Book
+              key={book.id}
               onUpdateBooks={onUpdateBooks}
               book={book}
             />
