@@ -31,15 +31,17 @@ class BooksApp extends React.Component {
 
   search = (query) => {
     this.setState({ query: query });
-    BooksAPI.search(this.state.query, 20).then((books) => {
-      if (books.error) {
-        this.setState({booksQuery: []})
-      }
-      else {
-        books.map(book => (this.state.books.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
-        this.setState({booksQuery: books})
-      }
-     })
+    if (query) {
+      BooksAPI.search(this.state.query, 20).then((books) => {
+        if (books.error) {
+          this.setState({booksQuery: []})
+        }
+        else {
+          books.map(book => (this.state.books.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
+          this.setState({booksQuery: books})
+        }
+      })
+    }
   }
 
   render() {
